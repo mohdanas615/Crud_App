@@ -6,7 +6,7 @@ import { editTask } from '../redux/TaskReducer';
 function EditTask() {
     const {id}=useParams();
     const tasks=useSelector((state=>state.tasks));
-    const existingTask=tasks.filter(f=> f.id ==id);
+    const existingTask=tasks.filter(f=> f.id ==Number(id));
     const {title, description,due_date, priority, status}=existingTask[0];
     const [editTitle, setEditTitle] = useState(title);
     const [editDescription, setEditDescription] = useState(description);
