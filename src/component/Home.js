@@ -397,7 +397,8 @@ function Home() {
           </div>
         </div>
 
-        <div className='d-flex justify-content-between align-items-center mb-3'>
+        <div className='d-flex justify-content-between align-items-center my-5 mb-2 bg-secondary text-white p-3 rounded'>
+          
           <b>Task List</b>
           <Link to='./AddTask'>
             <button type="button" className="btn btn-primary">
