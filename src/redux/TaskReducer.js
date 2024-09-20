@@ -11,7 +11,7 @@ const taskSlice=createSlice({
  },
  editTask:(state,action)=>{
    const {id,title,description, due_date, priority, status}=action.payload;
-   const editingTask=state.find(task=>task.id==id);
+   const editingTask=state.find(task=>task.id===id);
    if(editingTask){
       editingTask.title=title;
       editingTask.description=description;
@@ -23,7 +23,7 @@ const taskSlice=createSlice({
  },
  deleteTask:(state,action)=>{
    const {id}=action.payload;
-   const existingTask=state.find(task=>task.id==id);
+   const existingTask=state.find(task=>task.id===id);
    if(existingTask){
       return state.filter(f=>f.id !==id);
    }
