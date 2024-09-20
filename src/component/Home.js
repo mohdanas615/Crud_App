@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTask } from '../redux/TaskReducer';
+import { Modal, Button } from 'react-bootstrap';
 
 function Home() {
   const tasks = useSelector((state) => state.tasks);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [taskList, setTaskList] = useState(tasks);
   const [sortOrder, setSortOrder] = useState('asc');
+  
+  // State for managing modal visibility and selected task to delete
+  const [showModal, setShowModal] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
 
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
     dispatch(deleteTask({ id }));
+    setShowModal(false); // Close modal after deletion
   };
 
   const handleFilter = () => {
@@ -59,7 +65,16 @@ function Home() {
   
     setTaskList(sortedTasks);
   };
-  
+
+  const handleShowModal = (id) => {
+    setTaskToDelete(id); // Set the task to delete
+    setShowModal(true); // Show the modal
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false); // Close the modal without deleting
+    setTaskToDelete(null); // Clear the selected task
+  };
 
   useEffect(() => {
     setTaskList(tasks); // Reset taskList when tasks change
@@ -108,7 +123,6 @@ function Home() {
         </div>
 
         <div className='d-flex justify-content-between align-items-center my-5 mb-2 bg-secondary text-white p-3 rounded'>
-          
           <b>Task List</b>
           <Link to='./AddTask'>
             <button type="button" className="btn btn-primary">
@@ -143,7 +157,7 @@ function Home() {
                     <Link to={`/EditTask/${task.id}`}>
                       <button className='btn btn-primary'>Edit</button>
                     </Link>
-                    <button onClick={() => handleDelete(task.id)} className='btn btn-danger ms-2'>Delete</button>
+                    <button onClick={() => handleShowModal(task.id)} className='btn btn-danger ms-2'>Delete</button>
                   </td>
                 </tr>
               ))}
@@ -151,6 +165,22 @@ function Home() {
           </table>
         </div>
       </div>
+
+      {/* Modal for delete confirmation */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this task?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={() => handleDelete(taskToDelete)}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
