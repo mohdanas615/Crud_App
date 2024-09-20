@@ -87,9 +87,6 @@ button:hover {
 .form-outline{
   margin-left: 8vw;
 }
-.input-group{
-  /* margin-left: 5vw; */
-}
 .sort2{
   margin-left: 50vw;
 }
@@ -111,9 +108,6 @@ button:hover {
   text-align: center;
   background-color: grey;
   width: 77vw;
-  /* height: 50px; */
+  
   color: white;
 }
-/* .ms-2{
-  float: right;
-} */

@@ -2,8 +2,6 @@ import React, { useState,useEffect } from 'react'
 import { Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTask } from '../redux/TaskReducer';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
   const tasks=useSelector((state=>state.tasks))

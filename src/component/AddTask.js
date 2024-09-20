@@ -21,22 +21,7 @@ function AddTask() {
       e.preventDefault(); // Prevents page reload on form submission
   dispatch(addTask({id:tasks[tasks.length-1].id +1,title, description, due_date, priority, status }))
   navigate('/')
-    //   const newTask = {
-    //     title,
-    //     description,
-    //     dueDate,
-    //     priority,
-    //     status,
-    //   };
-  
-    //   console.log(newTask);
-      // You can add logic to store the task or send it to a backend API
-      // Reset the form after submission
-    //   setTitle('');
-    //   setDescription('');
-    //   setDueDate('');
-    //   setPriority('Low');
-    //   setStatus('In Progress');
+    
     };
   
   return (
